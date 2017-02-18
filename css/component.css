@@ -1,0 +1,203 @@
+.pop-media {
+	position: absolute;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	align-items: center;
+	width: 300px;
+	height: 200px;
+	pointer-events: none;
+	opacity: 0;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+.pop-media__overlay {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border-radius: 50%;
+}
+
+.pop-media__overlay--c1 {
+	opacity: 0.4;
+	background: linear-gradient(to left, #fd0be9, #fbf93d);
+}
+
+/* Hover text */
+
+.pop-text {
+	font-weight: bold;
+	position: relative;
+	cursor: default;
+	white-space: nowrap;
+	word-spacing: -0.1em;
+	color: #fded62;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-khtml-user-select: none;
+}
+
+
+.pop-media--reveal {
+	-webkit-mask: linear-gradient(to right, transparent 50%, black 50%);
+	mask: linear-gradient(to right, transparent 50%, black 50%);
+	-webkit-mask-size: 601px;
+	mask-size: 601px;
+	-webkit-mask-position: 0% 0%;
+	mask-position: 0% 0%;
+}
+
+.pop-media--reveal.pop-media--show {
+	-webkit-animation: revealMedia 0.4s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+	animation: revealMedia 0.4s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+/* we use pixels because it's more performant than percentages */
+@-webkit-keyframes revealMedia {
+	to {
+		-webkit-mask-position: 300px 0%;
+		mask-position: 300px 0%;
+	}
+}
+
+@keyframes revealMedia {
+	to {
+		-webkit-mask-position: 300px 0%;
+		mask-position: 300px 0%;
+	}
+}
+
+/* for smaller screens */
+@-webkit-keyframes revealMediaSmall {
+	to {
+		-webkit-mask-position: 250px 0%;
+		mask-position: 250px 0%;
+	}
+}
+
+@keyframes revealMediaSmall {
+	to {
+		-webkit-mask-position: 250px 0%;
+		mask-position: 250px 0%;
+	}
+}
+
+/* Mask reveal */
+
+.pop-media--revealfull {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	-webkit-mask: linear-gradient(to bottom, transparent 50%, black 50%);
+	mask: linear-gradient(to bottom, transparent 50%, black 50%);
+	-webkit-mask-size: 100% 200%;
+	mask-size: 100% 200%;
+	-webkit-mask-position: 0% 0%;
+	mask-position: 0% 0%;
+}
+
+.pop-media--revealfull.pop-media--show {
+	-webkit-animation: revealMediaFull 0.4s ease-out forwards;
+	animation: revealMediaFull 0.4s ease-out forwards;
+}
+
+@-webkit-keyframes revealMediaFull {
+	to {
+		-webkit-mask-position: 0% 100%;
+		mask-position: 0% 100%;
+	}
+}
+
+@keyframes revealMediaFull {
+	to {
+		-webkit-mask-position: 0% 100%;
+		mask-position: 0% 100%;
+	}
+}
+
+/* Mask effect */
+/* Learn more about this technique in Robin Delaporte's tutorial http://tympanus.net/codrops/2016/09/29/transition-effect-with-css-masks/ */
+
+.pop-media--mask {
+	width: 375px;
+	height: 250px;
+	-webkit-mask: url(../img/mask.png);
+	mask: url(../img/mask.png);
+	-webkit-mask-size: 2300% 100%;
+	mask-size: 2300% 100%;
+}
+
+.pop-media--mask.pop-media--show {
+	-webkit-animation: mask-play 0.7s steps(22) forwards;
+	animation: mask-play 0.7s steps(22) forwards;
+}
+
+@-webkit-keyframes mask-play {
+	from {
+		-webkit-mask-position: 0% 50%;
+		mask-position: 0% 50%;
+	}
+	to {
+		-webkit-mask-position: 100% 50%;
+		mask-position: 100% 50%;
+	}
+}
+
+@keyframes mask-play {
+	from {
+		-webkit-mask-position: 0% 50%;
+		mask-position: 0% 50%;
+	}
+	to {
+		-webkit-mask-position: 100% 50%;
+		mask-position: 100% 50%;
+	}
+}
+
+/* Style adjustments for smaller screens */
+@media screen and (max-width: 50em) {
+	.pop-media {
+		width: 225px;
+		height: 150px;
+	}
+	.pop-media--reveal {
+		-webkit-mask-size: 501px;
+		mask-size: 501px;
+	}
+	.pop-media--reveal.pop-media--show {
+		-webkit-animation-name: revealMediaSmall;
+		animation-name: revealMediaSmall;
+	}
+	.pop-media--mask {
+		width: 281.25px;
+		height: 187.5px;
+	}
+	
+	.pop-media--show .pop-media__image--split {
+		clip: rect(0px, 100px, 100px, 0px);
+	}
+
+	.clip-path-polygon .pop-media__image--split {
+		clip: auto;
+	}
+
+	.pop-media--show .pop-text__split--up {
+		-webkit-transform: translate3d(-46px, -45px, 0);
+		transform: translate3d(-46px, -45px, 0);
+	}
+
+	.pop-media--show .pop-text__split--down {
+		-webkit-transform: translate3d(58px, 43px, 0);
+		transform: translate3d(58px, 43px, 0);
+	}
+}
